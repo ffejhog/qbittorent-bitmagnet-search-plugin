@@ -1,0 +1,66 @@
+BITMAGNET QBITTORRENT SEARCH PLUGIN - FILE MANIFEST
+====================================================
+
+ESSENTIAL FILES (Required for Installation)
+--------------------------------------------
+bitmagnet.py          (14K) - Main search plugin
+bitmagnet.json        (142B) - Default configuration
+
+DOCUMENTATION (User Guides)
+---------------------------
+README.md             (7.3K) - Project overview and features
+QUICKSTART.md         (5.2K) - 5-minute getting started guide
+INSTALL.md            (7.9K) - Detailed installation instructions
+PROJECT_SUMMARY.md    (9.4K) - Complete project summary
+CONTRIBUTING.md       (2.0K) - Contribution guidelines
+
+LEGAL
+-----
+LICENSE               (1.1K) - MIT License
+
+EXAMPLES (Configuration Templates)
+----------------------------------
+examples/README.md                        - Configuration guide
+examples/bitmagnet.json.example           - Local setup
+examples/bitmagnet-remote.json.example    - Remote server
+examples/bitmagnet-fast.json.example      - Performance optimized
+
+TESTING FILES (Downloaded, Not Required)
+----------------------------------------
+nova2.py              (8.7K) - qBittorrent search runner
+helpers.py            (6.1K) - Helper functions
+novaprinter.py        (3.5K) - Result formatter
+socks.py              (32K)  - SOCKS proxy support
+
+GIT CONFIGURATION
+-----------------
+.gitignore                   - Git ignore rules
+
+TOTAL FILES: 16 essential + 4 test files
+TOTAL SIZE: ~105KB (without test files)
+
+INSTALLATION QUICK REFERENCE
+=============================
+
+Windows:
+  Copy bitmagnet.py to:
+  %LOCALAPPDATA%\qBittorrent\nova3\engines\
+
+Linux:
+  Copy bitmagnet.py to:
+  ~/.local/share/qBittorrent/nova3/engines/
+
+macOS:
+  Copy bitmagnet.py to:
+  ~/Library/Application Support/qBittorrent/nova3/engines/
+
+Then restart qBittorrent and enable "Bitmagnet" in Search tab.
+
+REQUIREMENTS
+============
+- qBittorrent 4.1.0+
+- Python 3.7+
+- Bitmagnet instance (local/remote)
+
+VERSION: 1.0
+LICENSE: MIT

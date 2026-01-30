@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# qBittorrent search engine test files (downloaded for testing)
+nova2.py
+nova2dl.py
+helpers.py
+novaprinter.py
+socks.py
+
+# User configuration (keep template, ignore user edits)
+# Uncomment if you want to ignore user-specific configs:
+# bitmagnet.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+test_results/
+*.log
