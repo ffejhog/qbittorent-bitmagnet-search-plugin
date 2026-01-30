@@ -1,0 +1,59 @@
+name: Tests
+
+on:
+  # Automatically run on pushes to main
+  push:
+    branches:
+      - main
+
+  # Allow manual triggering for PRs (not auto-run)
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+  # Manual trigger button in GitHub Actions UI
+  workflow_dispatch:
+
+# Make PR-triggered runs require approval
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Run Plugin Tests
+    runs-on: ubuntu-latest
+
+    # Only auto-run for push to main; PRs require manual trigger via workflow_dispatch
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Download qBittorrent nova3 test framework
+        run: |
+          wget https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/searchengine/nova3/nova2.py
+          wget https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/searchengine/nova3/helpers.py
+          wget https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/searchengine/nova3/novaprinter.py
+          wget https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/searchengine/nova3/socks.py
+
+      - name: Verify plugin syntax
+        run: python3 -m py_compile bitmagnet.py
+
+      - name: Test plugin import
+        run: |
+          python3 -c "
+          import sys
+          sys.path.insert(0, '.')
+          # Test that the module can be imported without errors
+          import bitmagnet
+          print('✓ Plugin imported successfully')
+          print(f'  Name: {bitmagnet.bitmagnet.name}')
+          print(f'  URL: {bitmagnet.bitmagnet.url}')
+          print(f'  Categories: {list(bitmagnet.bitmagnet.supported_categories.keys())}')
+          "
