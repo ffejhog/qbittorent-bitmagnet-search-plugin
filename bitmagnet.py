@@ -33,7 +33,6 @@ import urllib.error
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
 # Configuration file management
@@ -158,6 +157,10 @@ class bitmagnet:
                 results = self._graphql_search(what, content_types, offset)
                 
                 if not results or 'items' not in results:
+                    if not results:
+                        sys.stderr.write("Bitmagnet: No results returned from API\n")
+                    elif 'items' not in results:
+                        sys.stderr.write(f"Bitmagnet: API response missing 'items' field. Response: {results}\n")
                     break
                 
                 # Process and print each result
@@ -323,6 +326,7 @@ class bitmagnet:
                 'leech': leech_str,
                 'engine_url': self.base_url,
                 'desc_link': desc_link,
+                'pub_date': pub_date_str,
             }
             
         except Exception as e:
